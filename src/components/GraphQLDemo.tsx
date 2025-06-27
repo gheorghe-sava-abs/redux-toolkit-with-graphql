@@ -6,6 +6,7 @@ import {
   updateUser,
   deleteUser,
   fetchUser,
+  fetchUsers_name,
 } from '../store/thunks/usersThunks';
 import {
   fetchProducts,
@@ -15,6 +16,7 @@ import {
   fetchProduct,
   fetchProductsByCategory,
   updateProductStock,
+  fetchProducts_name,
 } from '../store/thunks/productsThunks';
 import {
   fetchOrders,
@@ -26,14 +28,20 @@ import {
   fetchOrdersByStatus,
   updateOrderStatus,
   addItemToOrder,
+  fetchOrders_name,
 } from '../store/thunks/ordersThunks';
 import type { UserInput, ProductInput, OrderInput, OrderItemInput } from '../store/models';
+import { selectActionIsLoading } from '@/store/extensions';
 
 export const GraphQLDemo: React.FC = () => {
   const dispatch = useAppDispatch();
   const { users, selectedUser } = useAppSelector(state => state.users);
   const { products, selectedProduct } = useAppSelector(state => state.products);
   const { orders, selectedOrder } = useAppSelector(state => state.orders);
+
+  const fetchOrdersIsLoading = useAppSelector(state => selectActionIsLoading(state, fetchOrders_name));
+  const fetchUsersIsLoading = useAppSelector(state => selectActionIsLoading(state, fetchUsers_name));
+  const fetchProductsIsLoading = useAppSelector(state => selectActionIsLoading(state, fetchProducts_name));
 
   const [newUser, setNewUser] = useState<UserInput>({ name: '', email: '', age: 0 });
   const [newProduct, setNewProduct] = useState<ProductInput>({ name: '', description: '', price: 0, category: '', stock: 0 });
@@ -135,7 +143,7 @@ export const GraphQLDemo: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold mb-8">GraphQL + Redux Toolkit Demo</h1>
-
+      {(fetchOrdersIsLoading || fetchUsersIsLoading || fetchProductsIsLoading) && <div>Loading...</div>}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Users Section */}
         <div className="bg-white p-6 rounded-lg shadow-md">

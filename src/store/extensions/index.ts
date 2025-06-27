@@ -1,4 +1,5 @@
 import type { ActionReducerMapBuilder } from "@reduxjs/toolkit";
+import type { RootState } from "..";
 export interface BaseState {
     actions: {
         [key: string]: { isLoading: boolean, error: string | null }
@@ -30,4 +31,15 @@ export const interceptThunkResults = (builder: ActionReducerMapBuilder<BaseState
                 error: "Error",
             };
         });
+}
+
+export const selectBaseAction = (state: RootState, actionName: string) => {
+    const slice = state[actionName.split("/")[0] as keyof RootState];
+    return slice.actions[actionName] || {};
+}
+export const selectActionIsLoading = (state: RootState, actionName: string) => {
+    return selectBaseAction(state, actionName).isLoading;
+}
+export const selectActionError = (state: RootState, actionName: string) => {
+    return selectBaseAction(state, actionName).error;
 }
