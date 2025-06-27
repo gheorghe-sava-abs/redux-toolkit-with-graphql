@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc -b && vite build",
+    "codegen": "env-cmd -f ./.env graphql-codegen --config codegen.ts",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest"
@@ -54,6 +55,10 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.2.0",
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-operations": "^4.6.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.3",
     "husky": "^9.1.7",
     "msw": "^2.10.2",
     "tsx": "^4.19.2",
