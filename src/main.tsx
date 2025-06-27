@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/client'
 import { GraphQLDemo } from './components/GraphQLDemo';
 import { store } from './store';
 import { apolloClient } from './services/apolloClient';
+import './index.css'
 
 // Log version information
 const appVersion = import.meta.env.VITE_APP_VERSION || '1.0.0'
