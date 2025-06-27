@@ -18,7 +18,7 @@ import type {
   UpdateProductResponse,
   DeleteProductResponse,
   UpdateProductStockResponse,
-} from '../../types';
+} from '../models';
 
 // Async thunks for GraphQL operations
 export const fetchProducts = createAsyncThunk(

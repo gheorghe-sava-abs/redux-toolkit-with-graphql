@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { Product, ProductsState } from '../../types';
+import type { Product, ProductsState } from '../models';
 import {
   fetchProducts,
   fetchProduct,
@@ -10,21 +10,19 @@ import {
   deleteProduct,
   updateProductStock,
 } from '../thunks/productsThunks';
+import { interceptThunkResults } from '../extensions';
 
 const initialState: ProductsState = {
   products: [],
   selectedProduct: null,
-  loading: false,
-  error: null,
+  actions: {},
 };
 
+const productsSlice_name = "products";
 const productsSlice = createSlice({
-  name: 'products',
+  name: productsSlice_name,
   initialState,
   reducers: {
-    clearError: (state) => {
-      state.error = null;
-    },
     setSelectedProduct: (state, action: PayloadAction<Product | null>) => {
       state.selectedProduct = action.payload;
     },
@@ -33,76 +31,22 @@ const productsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // fetchProducts
     builder
-      .addCase(fetchProducts.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.loading = false;
         state.products = action.payload;
-      })
-      .addCase(fetchProducts.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-
-    // fetchProduct
-    builder
-      .addCase(fetchProduct.pending, (state) => {
-        state.loading = true;
-        state.error = null;
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
-        state.loading = false;
         state.selectedProduct = action.payload;
       })
-      .addCase(fetchProduct.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-
-    // fetchProductsByCategory
-    builder
-      .addCase(fetchProductsByCategory.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
-        state.loading = false;
         state.products = action.payload;
       })
-      .addCase(fetchProductsByCategory.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-
-    // createProduct
-    builder
-      .addCase(createProduct.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(createProduct.fulfilled, (state, action) => {
-        state.loading = false;
         if (action.payload) {
           state.products.push(action.payload);
         }
       })
-      .addCase(createProduct.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-
-    // updateProduct
-    builder
-      .addCase(updateProduct.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(updateProduct.fulfilled, (state, action) => {
-        state.loading = false;
         if (action.payload) {
           const index = state.products.findIndex(product => product.id === action.payload?.id);
           if (index !== -1) {
@@ -113,19 +57,7 @@ const productsSlice = createSlice({
           }
         }
       })
-      .addCase(updateProduct.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-
-    // deleteProduct
-    builder
-      .addCase(deleteProduct.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(deleteProduct.fulfilled, (state, action) => {
-        state.loading = false;
         if (action.payload) {
           state.products = state.products.filter(product => product.id !== action.payload?.id);
           if (state.selectedProduct?.id === action.payload?.id) {
@@ -133,19 +65,7 @@ const productsSlice = createSlice({
           }
         }
       })
-      .addCase(deleteProduct.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-
-    // updateProductStock
-    builder
-      .addCase(updateProductStock.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(updateProductStock.fulfilled, (state, action) => {
-        state.loading = false;
         if (action.payload) {
           const index = state.products.findIndex(product => product.id === action.payload?.id);
           if (index !== -1) {
@@ -156,12 +76,9 @@ const productsSlice = createSlice({
           }
         }
       })
-      .addCase(updateProductStock.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
+      interceptThunkResults(builder, productsSlice_name);
   },
 });
 
-export const { clearError, setSelectedProduct, clearSelectedProduct } = productsSlice.actions;
+export const { setSelectedProduct, clearSelectedProduct } = productsSlice.actions;
 export default productsSlice.reducer; 

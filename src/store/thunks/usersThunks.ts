@@ -14,7 +14,7 @@ import type {
   CreateUserResponse,
   UpdateUserResponse,
   DeleteUserResponse,
-} from '../../types';
+} from '../models';
 
 // Async thunks for GraphQL operations
 export const fetchUsers = createAsyncThunk(

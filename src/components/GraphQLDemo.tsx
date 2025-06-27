@@ -27,13 +27,13 @@ import {
   updateOrderStatus,
   addItemToOrder,
 } from '../store/thunks/ordersThunks';
-import type { UserInput, ProductInput, OrderInput, OrderItemInput, ShippingAddressInput } from '../types';
+import type { UserInput, ProductInput, OrderInput, OrderItemInput } from '../store/models';
 
 export const GraphQLDemo: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { users, selectedUser, loading: usersLoading, error: usersError } = useAppSelector(state => state.users);
-  const { products, selectedProduct, loading: productsLoading, error: productsError } = useAppSelector(state => state.products);
-  const { orders, selectedOrder, loading: ordersLoading, error: ordersError } = useAppSelector(state => state.orders);
+  const { users, selectedUser } = useAppSelector(state => state.users);
+  const { products, selectedProduct } = useAppSelector(state => state.products);
+  const { orders, selectedOrder } = useAppSelector(state => state.orders);
 
   const [newUser, setNewUser] = useState<UserInput>({ name: '', email: '', age: 0 });
   const [newProduct, setNewProduct] = useState<ProductInput>({ name: '', description: '', price: 0, category: '', stock: 0 });
@@ -135,20 +135,6 @@ export const GraphQLDemo: React.FC = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold mb-8">GraphQL + Redux Toolkit Demo</h1>
-
-      {/* Error Display */}
-      {(usersError || productsError || ordersError) && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-          <strong>Error:</strong> {usersError || productsError || ordersError}
-        </div>
-      )}
-
-      {/* Loading Indicator */}
-      {(usersLoading || productsLoading || ordersLoading) && (
-        <div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded mb-4">
-          Loading...
-        </div>
-      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Users Section */}

@@ -23,7 +23,7 @@ import type {
   DeleteOrderResponse,
   UpdateOrderStatusResponse,
   AddItemToOrderResponse,
-} from '../../types';
+} from '../models';
 
 // Async thunks for GraphQL operations
 export const fetchOrders = createAsyncThunk(
