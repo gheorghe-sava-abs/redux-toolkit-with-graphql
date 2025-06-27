@@ -21,8 +21,9 @@ import type {
 } from '../models';
 
 // Async thunks for GraphQL operations
+export const fetchProducts_name = 'products/fetchProducts';
 export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
+  fetchProducts_name,
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.query<GetProductsResponse>({
@@ -35,8 +36,9 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
+export const fetchProduct_name = 'products/fetchProduct';
 export const fetchProduct = createAsyncThunk(
-  'products/fetchProduct',
+  fetchProduct_name,
   async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.query<GetProductResponse>({
@@ -50,8 +52,9 @@ export const fetchProduct = createAsyncThunk(
   }
 );
 
+export const fetchProductsByCategory_name = 'products/fetchProductsByCategory';
 export const fetchProductsByCategory = createAsyncThunk(
-  'products/fetchProductsByCategory',
+  fetchProductsByCategory_name,
   async (category: string, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.query<GetProductsByCategoryResponse>({
@@ -65,8 +68,9 @@ export const fetchProductsByCategory = createAsyncThunk(
   }
 );
 
+export const createProduct_name = 'products/createProduct';
 export const createProduct = createAsyncThunk(
-  'products/createProduct',
+  createProduct_name,
   async (productInput: ProductInput, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<CreateProductResponse>({
@@ -81,8 +85,9 @@ export const createProduct = createAsyncThunk(
   }
 );
 
+export const updateProduct_name = 'products/updateProduct';
 export const updateProduct = createAsyncThunk(
-  'products/updateProduct',
+  updateProduct_name,
   async ({ id, input }: { id: string; input: ProductInput }, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<UpdateProductResponse>({
@@ -97,8 +102,9 @@ export const updateProduct = createAsyncThunk(
   }
 );
 
+export const deleteProduct_name = 'products/deleteProduct';
 export const deleteProduct = createAsyncThunk(
-  'products/deleteProduct',
+  deleteProduct_name,
   async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<DeleteProductResponse>({
@@ -113,8 +119,9 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
+export const updateProductStock_name = 'products/updateProductStock';
 export const updateProductStock = createAsyncThunk(
-  'products/updateProductStock',
+  updateProductStock_name,
   async ({ id, quantity }: { id: string; quantity: number }, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<UpdateProductStockResponse>({

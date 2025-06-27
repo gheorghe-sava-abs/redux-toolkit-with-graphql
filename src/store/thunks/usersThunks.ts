@@ -17,8 +17,9 @@ import type {
 } from '../models';
 
 // Async thunks for GraphQL operations
+export const fetchUsers_name = 'users/fetchUsers';
 export const fetchUsers = createAsyncThunk(
-  'users/fetchUsers',
+  fetchUsers_name,
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.query<GetUsersResponse>({
@@ -31,8 +32,9 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
+export const fetchUser_name = 'users/fetchUser';
 export const fetchUser = createAsyncThunk(
-  'users/fetchUser',
+  fetchUser_name,
   async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.query<GetUserResponse>({
@@ -46,8 +48,9 @@ export const fetchUser = createAsyncThunk(
   }
 );
 
+export const createUser_name = 'users/createUser';
 export const createUser = createAsyncThunk(
-  'users/createUser',
+  createUser_name,
   async (userInput: UserInput, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<CreateUserResponse>({
@@ -62,8 +65,9 @@ export const createUser = createAsyncThunk(
   }
 );
 
+export const updateUser_name = 'users/updateUser';
 export const updateUser = createAsyncThunk(
-  'users/updateUser',
+  updateUser_name,
   async ({ id, input }: { id: string; input: UserInput }, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<UpdateUserResponse>({
@@ -78,8 +82,9 @@ export const updateUser = createAsyncThunk(
   }
 );
 
+export const deleteUser_name = 'users/deleteUser';
 export const deleteUser = createAsyncThunk(
-  'users/deleteUser',
+  deleteUser_name,
   async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<DeleteUserResponse>({

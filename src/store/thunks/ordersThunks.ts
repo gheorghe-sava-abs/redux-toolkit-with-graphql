@@ -26,8 +26,9 @@ import type {
 } from '../models';
 
 // Async thunks for GraphQL operations
+export const fetchOrders_name = 'orders/fetchOrders';
 export const fetchOrders = createAsyncThunk(
-  'orders/fetchOrders',
+  fetchOrders_name,
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.query<GetOrdersResponse>({
@@ -40,8 +41,9 @@ export const fetchOrders = createAsyncThunk(
   }
 );
 
+export const fetchOrder_name = 'orders/fetchOrder';
 export const fetchOrder = createAsyncThunk(
-  'orders/fetchOrder',
+  fetchOrder_name,
   async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.query<GetOrderResponse>({
@@ -55,8 +57,9 @@ export const fetchOrder = createAsyncThunk(
   }
 );
 
+export const fetchOrdersByUser_name = 'orders/fetchOrdersByUser';
 export const fetchOrdersByUser = createAsyncThunk(
-  'orders/fetchOrdersByUser',
+  fetchOrdersByUser_name,
   async (userId: string, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.query<GetOrdersByUserResponse>({
@@ -70,8 +73,9 @@ export const fetchOrdersByUser = createAsyncThunk(
   }
 );
 
+export const fetchOrdersByStatus_name = 'orders/fetchOrdersByStatus';
 export const fetchOrdersByStatus = createAsyncThunk(
-  'orders/fetchOrdersByStatus',
+  fetchOrdersByStatus_name,
   async (status: string, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.query<GetOrdersByStatusResponse>({
@@ -85,8 +89,9 @@ export const fetchOrdersByStatus = createAsyncThunk(
   }
 );
 
+export const createOrder_name = 'orders/createOrder';
 export const createOrder = createAsyncThunk(
-  'orders/createOrder',
+  createOrder_name,
   async (orderInput: OrderInput, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<CreateOrderResponse>({
@@ -101,8 +106,9 @@ export const createOrder = createAsyncThunk(
   }
 );
 
+export const updateOrder_name = 'orders/updateOrder';
 export const updateOrder = createAsyncThunk(
-  'orders/updateOrder',
+  updateOrder_name,
   async ({ id, input }: { id: string; input: OrderInput }, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<UpdateOrderResponse>({
@@ -117,8 +123,9 @@ export const updateOrder = createAsyncThunk(
   }
 );
 
+export const deleteOrder_name = 'orders/deleteOrder';
 export const deleteOrder = createAsyncThunk(
-  'orders/deleteOrder',
+  deleteOrder_name,
   async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<DeleteOrderResponse>({
@@ -133,8 +140,9 @@ export const deleteOrder = createAsyncThunk(
   }
 );
 
+export const updateOrderStatus_name = 'orders/updateOrderStatus';
 export const updateOrderStatus = createAsyncThunk(
-  'orders/updateOrderStatus',
+  updateOrderStatus_name,
   async ({ id, status }: { id: string; status: string }, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<UpdateOrderStatusResponse>({
@@ -149,8 +157,9 @@ export const updateOrderStatus = createAsyncThunk(
   }
 );
 
+export const addItemToOrder_name = 'orders/addItemToOrder';
 export const addItemToOrder = createAsyncThunk(
-  'orders/addItemToOrder',
+  addItemToOrder_name,
   async ({ id, item }: { id: string; item: OrderItemInput }, { rejectWithValue }) => {
     try {
       const { data } = await apolloClient.mutate<AddItemToOrderResponse>({
