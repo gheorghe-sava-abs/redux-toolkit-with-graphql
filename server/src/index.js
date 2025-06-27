@@ -12,6 +12,11 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
+// Add delay middleware for all requests (useful for testing loading states)
+app.use((req, res, next) => {
+  setTimeout(next, 500);
+});
+
 // Create Apollo Server
 const server = new ApolloServer({
   typeDefs,
@@ -52,6 +57,7 @@ async function startServer() {
     console.log(`🚀 GraphQL Server running at http://localhost:${PORT}`);
     console.log(`📊 GraphQL Playground available at http://localhost:${PORT}/graphql`);
     console.log(`🏥 Health check available at http://localhost:${PORT}/health`);
+    console.log(`⏱️  All requests have a 500ms delay for testing loading states`);
   });
 }
 
