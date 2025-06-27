@@ -6,7 +6,7 @@ import {
   updateUser,
   deleteUser,
   fetchUser,
-} from '../store/slices/usersSlice';
+} from '../store/thunks/usersThunks';
 import {
   fetchProducts,
   createProduct,
@@ -15,7 +15,7 @@ import {
   fetchProduct,
   fetchProductsByCategory,
   updateProductStock,
-} from '../store/slices/productsSlice';
+} from '../store/thunks/productsThunks';
 import {
   fetchOrders,
   createOrder,
@@ -26,7 +26,7 @@ import {
   fetchOrdersByStatus,
   updateOrderStatus,
   addItemToOrder,
-} from '../store/slices/ordersSlice';
+} from '../store/thunks/ordersThunks';
 import type { UserInput, ProductInput, OrderInput, OrderItemInput, ShippingAddressInput } from '../types';
 
 export const GraphQLDemo: React.FC = () => {
