@@ -8,9 +8,7 @@ A modern React application demonstrating the integration of Redux Toolkit with G
 - **Redux Toolkit Integration**: Modern state management with async thunks
 - **GraphQL API**: Type-safe queries and mutations with Apollo Client
 - **Three Complete Models**: Users, Products, and Orders with full CRUD operations
-- **TypeScript Support**: End-to-end type safety
-- **Modern UI**: Clean, responsive interface with Tailwind CSS
-- **Real-time Data**: Automatic cache invalidation and data synchronization
+- **TypeScript Support**: Type safety
 
 ## 📋 Prerequisites
 
