@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { ApolloProvider } from '@apollo/client'
-import { GraphQLDemo } from './components/GraphQLDemo';
+import { App } from './App';
 import { store } from './store';
 import { apolloClient } from './services/apolloClient';
 import './index.css'
@@ -15,9 +15,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
       <ApolloProvider client={apolloClient}>
-        <div className="min-h-screen bg-gray-100">
-          <GraphQLDemo />
-        </div>
+        <App />
       </ApolloProvider>
     </Provider>
   </StrictMode>,
